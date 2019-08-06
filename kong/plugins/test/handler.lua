@@ -6,10 +6,10 @@
 
 local BasePlugin = require("kong.plugins.base_plugin")
 
-local log = kong.log
 
 local MyHanlder = BasePlugin:extend()
 
+local log = kong.log
 local strPrefix = "===========> config: "
 local requestPrint = "===========> req: "
 
@@ -21,6 +21,8 @@ function MyHanlder:new()
 end
 
 function MyHanlder:access(conf)
+    MyHanlder.super.access(self)
+
     log.info(strPrefix.."access executed...")
     log.info(strPrefix.."method="..conf.method)
     log.info(strPrefix.."headerName="..conf.header)
@@ -34,6 +36,10 @@ function MyHanlder:access(conf)
 
     for i, v in ipairs(headers) do
         log.info(requestPrint.."headerName="..i.." / headerValue="..v)
+    end
+
+    if conf.config.intercepter then
+        log.info("================> 拦截他  <===============")
     end
 
     --log.info(requestPrint.."key="..conf.key)

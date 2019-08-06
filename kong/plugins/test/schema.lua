@@ -14,6 +14,9 @@ return {
         --    protocols = {typedefs.protocols_http, typedefs.protocols}
         --},
         {
+            consumer = typedefs.no_consumer
+        },
+        {
             config = {
                 type = "record",
                 fields = {
@@ -34,13 +37,17 @@ return {
                             type = "string",
                             default = "GET"
                         }
+                    },
+                    {
+                        intercepter = {
+                            type = "boolean",
+                            default = "true"
+                        }
                     }
                 }
             }
-        },
-        {
-            consumer = typedefs.no_consumer
         }
+
     }
 }
 
