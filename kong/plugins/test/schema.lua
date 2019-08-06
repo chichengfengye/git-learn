@@ -10,9 +10,9 @@ local typedefs = require("kong.db.schema.typedefs")
 return {
     name = "test",
     fields = {
-        {
-            protocols = {typedefs.protocols_http, typedefs.protocols}
-        },
+        --{
+        --    protocols = {typedefs.protocols_http, typedefs.protocols}
+        --},
         {
             config = {
                 type = "record",
@@ -20,14 +20,13 @@ return {
                     {
                         key = {
                             type = "string",
-                            auth = true,
-                            value = "123"
+                            default = "123"
                         }
                     },
                     {
                         header = {
                             type = "string",
-                            value = "TOKEN",
+                            default = "TOKEN",
                         }
                     },
                     {
