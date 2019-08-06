@@ -6,7 +6,7 @@
 
 local BasePlugin = require("kong.plugins.base_plugin")
 
-local log = kong.response
+local log = kong.log
 
 local MyHanlder = BasePlugin:extend()
 
@@ -17,18 +17,21 @@ MyHanlder.VERSION = "1.0.0"
 MyHanlder.PRIORITY = 14
 
 function MyHanlder:access(conf)
-    kong.log.info(strPrefix.."access executed...")
-    kong.log.info(strPrefix.."method="..conf.method)
-    kong.log.info(strPrefix.."headerName="..conf.method)
-    kong.log.info(strPrefix.."key="..conf.key)
-
+    log.info(strPrefix.."access executed...")
+    log.info(strPrefix.."method="..conf.method)
+    log.info(strPrefix.."headerName="..conf.header)
+    log.info(strPrefix.."key="..conf.key)
 
     local headers = kong.request.get_headers()
     
-    kong.log.info(requestPrint.."access executed...")
-    kong.log.info(requestPrint.."method="..kong.request.get_method())
-    kong.log.info(requestPrint.."headerName="..kong.request.
-    kong.log.info(requestPrint.."key="..conf.key)
+    log.info(requestPrint.."access executed...")
+    log.info(requestPrint.."method="..kong.request.get_method())
+
+    for i, v in ipairs(headers) do
+        log.info(requestPrint.."headerName="..i.." / headerValue="..v)
+    end
+
+    --log.info(requestPrint.."key="..conf.key)
 end
 
 
