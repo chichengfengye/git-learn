@@ -41,7 +41,7 @@ return {
                     {
                         intercepter = {
                             type = "boolean",
-                            default = "true"
+                            default = true
                         }
                     }
                 }
