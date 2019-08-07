@@ -10,7 +10,7 @@ local endpoints = require "kong.api.endpoints"
 return {
     ["/api/usr"] = {
         --schema = myschema,
-        fields = {
+        methods = {
             GET = function()
                 return "GET method"
             end,
