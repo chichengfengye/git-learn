@@ -29,24 +29,24 @@ function MyHanlder:access(conf)
 
     local headers = kong.request.get_headers()
     
-    printLog("access executed...")
-    printLog(requestPrint.."method="..kong.request.get_method())
+    MyHanlder.printLog("access executed...")
+    MyHanlder.printLog(requestPrint.."method="..kong.request.get_method())
 
-    printLog("headers length = "..table.getn(headers))
+    MyHanlder.printLog("headers length = "..table.getn(headers))
 
     for i, v in ipairs(headers) do
-        printLog(requestPrint.."headerName="..i.." / headerValue="..v)
+        MyHanlder.printLog(requestPrint.."headerName="..i.." / headerValue="..v)
     end
 
 
     if conf.intercepter then
-        printLog("================> 拦截他  <===============")
+        MyHanlder.printLog("================> 拦截他  <===============")
 
     else
-        printLog("================> do not intecepter  <===============")
+        MyHanlder.printLog("================> do not intecepter  <===============")
     end
 
-    --printLog(requestPrint.."key="..conf.key)
+    --MyHanlder.printLog(requestPrint.."key="..conf.key)
 end
 
 return MyHanlder
