@@ -38,7 +38,7 @@ function MyHanlder:access(conf)
         log.info(requestPrint.."headerName="..i.." / headerValue="..v)
     end
 
-    if conf.config.intercepter then
+    if conf.intercepter then
         log.info("================> 拦截他  <===============")
     end
 
