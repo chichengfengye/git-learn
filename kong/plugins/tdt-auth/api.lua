@@ -13,6 +13,7 @@ local credentials_schema = kong.db.tdt_credentials.schema
 
 local function doGet()
     print("...doGet....")
+    ngx.log(ngx.ERR, "============ Bye World! ============")
     return "hello lua!"
 end
 
