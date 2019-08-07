@@ -16,6 +16,10 @@ local requestPrint = "===========> req: "
 MyHanlder.VERSION = "1.0.0"
 MyHanlder.PRIORITY = 14
 
+function MyHanlder.printLog(content)
+    ngx.log(ngx.DEBUG , content)
+end
+
 function MyHanlder:new()
     MyHanlder.super.new(self, "test")
 end
@@ -25,24 +29,24 @@ function MyHanlder:access(conf)
 
     local headers = kong.request.get_headers()
     
-    ngx.log(ngx.DEBUG ,"access executed...")
-    ngx.log(ngx.DEBUG ,requestPrint.."method="..kong.request.get_method())
+    printLog("access executed...")
+    printLog(requestPrint.."method="..kong.request.get_method())
 
-    ngx.log(ngx.DEBUG ,"headers length = "..table.getn(headers))
+    printLog("headers length = "..table.getn(headers))
 
     for i, v in ipairs(headers) do
-        ngx.log(ngx.DEBUG ,requestPrint.."headerName="..i.." / headerValue="..v)
+        printLog(requestPrint.."headerName="..i.." / headerValue="..v)
     end
 
 
     if conf.intercepter then
-        ngx.log(ngx.DEBUG ,"================> 拦截他  <===============")
+        printLog("================> 拦截他  <===============")
 
     else
-        ngx.log(ngx.DEBUG ,"================> do not intecepter  <===============")
+        printLog("================> do not intecepter  <===============")
     end
 
-    --ngx.log(ngx.DEBUG ,requestPrint.."key="..conf.key)
+    --printLog(requestPrint.."key="..conf.key)
 end
 
 return MyHanlder
