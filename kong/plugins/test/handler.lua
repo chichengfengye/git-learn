@@ -23,26 +23,39 @@ end
 function MyHanlder:access(conf)
     MyHanlder.super.access(self)
 
-    log.info(strPrefix.."access executed...")
-    log.info(strPrefix.."method="..conf.method)
-    log.info(strPrefix.."headerName="..conf.header)
-    log.info(strPrefix.."key="..conf.key)
+    ngx.log(strPrefix.."access executed...")
+    ngx.log(strPrefix.."method="..conf.method)
+    ngx.log(strPrefix.."headerName="..conf.header)
+    ngx.log(strPrefix.."key="..conf.key)
+
+
+    print(strPrefix.."access executed...")
+    print(strPrefix.."method="..conf.method)
+    print(strPrefix.."headerName="..conf.header)
+    print(strPrefix.."key="..conf.key)
 
     local headers = kong.request.get_headers()
     
-    log.info(requestPrint.."access executed...")
-    log.info(requestPrint.."method="..kong.request.get_method())
+    ngx.log(requestPrint.."access executed...")
+    ngx.log(requestPrint.."method="..kong.request.get_method())
+
+    print(requestPrint.."access executed...")
+    print(requestPrint.."method="..kong.request.get_method())
 
 
     for i, v in ipairs(headers) do
-        log.info(requestPrint.."headerName="..i.." / headerValue="..v)
+        ngx.log(requestPrint.."headerName="..i.." / headerValue="..v)
+    end
+
+    for i, v in ipairs(headers) do
+        print(requestPrint.."headerName="..i.." / headerValue="..v)
     end
 
     if conf.intercepter then
-        log.info("================> 拦截他  <===============")
+        ngx.log("================> 拦截他  <===============")
     end
 
-    --log.info(requestPrint.."key="..conf.key)
+    --ngx.log(requestPrint.."key="..conf.key)
 end
 
 return MyHanlder
