@@ -23,36 +23,23 @@ end
 function MyHanlder:access(conf)
     MyHanlder.super.access(self)
 
-    ngx.log(ngx.DEBUG ,strPrefix.."access executed...")
-    ngx.log(ngx.DEBUG ,strPrefix.."method="..conf.method)
-    ngx.log(ngx.DEBUG ,strPrefix.."headerName="..conf.header)
-    ngx.log(ngx.DEBUG ,strPrefix.."key="..conf.key)
-
-
-    print(strPrefix.."access executed...")
-    print(strPrefix.."method="..conf.method)
-    print(strPrefix.."headerName="..conf.header)
-    print(strPrefix.."key="..conf.key)
-
     local headers = kong.request.get_headers()
     
-    ngx.log(ngx.DEBUG ,requestPrint.."access executed...")
+    ngx.log(ngx.DEBUG ,"access executed...")
     ngx.log(ngx.DEBUG ,requestPrint.."method="..kong.request.get_method())
 
-    print(requestPrint.."access executed...")
-    print(requestPrint.."method="..kong.request.get_method())
-
+    ngx.log(ngx.DEBUG ,"headers length = "..table.getn(headers))
 
     for i, v in ipairs(headers) do
         ngx.log(ngx.DEBUG ,requestPrint.."headerName="..i.." / headerValue="..v)
     end
 
-    for i, v in ipairs(headers) do
-        print(requestPrint.."headerName="..i.." / headerValue="..v)
-    end
 
     if conf.intercepter then
         ngx.log(ngx.DEBUG ,"================> 拦截他  <===============")
+
+    else
+        ngx.log(ngx.DEBUG ,"================> do not intecepter  <===============")
     end
 
     --ngx.log(ngx.DEBUG ,requestPrint.."key="..conf.key)
